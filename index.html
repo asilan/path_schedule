@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <title>Simple Map</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <!-- <script src="https://unpkg.com/geometric@2.5.4/build/geometric.min.js"></script> -->
+
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="module" src="./index.js"></script>
+  <script src="conversion.js"></script>
+  <script>
+    (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+        key: "AIzaSyDZooX76OHo4MfvyJXDjH3Cwcx7V5jKtqo",
+        v: "weekly",
+        // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+        // Add other bootstrap parameters as needed, using camel case.
+      });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+  <div id="map" class="column map"></div>
+  <div id="control" class="column control">
+    <label for="drawBorderCheckbox">Draw field border</label>
+    <input type="checkbox" id="drawBorderCheckbox" onclick="drawBorderCheck()" />
+    <br>
+    <label for="drawFirstRowCheckbox">Draw first row</label>
+    <input type="checkbox" id="drawFirstRowCheckbox" onclick="drawFirstRowCheck()" />
+    <br>
+    <label for="rowNum">Number of rows</label>
+    <br>
+    <input type="number" id="rowNum" value="10" min="1" step="1" oninput="this.value = Math.round(this.value);"/>
+    <br>
+    <label for="rowDist">Distance between rows</label>
+    <br>
+    <input type="number" id="rowDist" value="1"/>
+    <br>
+
+    <label for="eastingOffset">Easting offset (m)</label>
+    <br>
+    <input type="number" id="eastingOffset" value="1" min="-10" max="10"/>
+    <br>
+
+    <label for="northingOffset">Northing offset (m)</label>
+    <br>
+    <input type="number" id="northingOffset" value="1" min="-10" max="10"/>
+    <br>
+
+    <button id="generatePathButton" onclick="generatePath()">Generate Path</button>
+    <br>
+    <button id="downloadMission" onclick="downloadMission()">Download Mission</button>
+  </div>
+  </div>
+
+  <!-- <div id="contextMenu" class="contextMenu">
+    <div onclick="alert('On click of item 1 is called')">
+      Item 1
+    </div>
+  </div> -->
+  <!-- prettier-ignore -->
+
+</body>
+
+</html>
